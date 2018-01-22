@@ -1,0 +1,6 @@
+.idea/
+ProjetIHM.iml
+/target/classes/projet
+/target/generated-sources
+/target/generated-test-sources
+/target/test-classes
