@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Incident implements Serializable
 {
-    private static final String savePath = "IncidentsSaveFile.txt";
+    private static final String savePath = "./IncidentsSaveFile.txt";
 
     private Urgency      urgency;
     private Room         room;
@@ -77,7 +77,7 @@ public class Incident implements Serializable
     public static void writeToSave (ArrayList<Incident> incidents)
     {
         //noinspection ConstantConditions
-        File file = new File(Incident.class.getClassLoader().getResource(savePath).getFile());
+        File file = new File(savePath);
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file)))
         {
@@ -92,7 +92,7 @@ public class Incident implements Serializable
     public static ArrayList<Incident> readFromSave ()
     {
         //noinspection ConstantConditions
-        File file = new File(Incident.class.getClassLoader().getResource(savePath).getFile());
+        File file = new File(savePath);
 
         try (ObjectInputStream ooi = new ObjectInputStream(new FileInputStream(file)))
         {
