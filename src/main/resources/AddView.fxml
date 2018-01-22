@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.ihm.controller.AddController">
+	<children>
+		<Button layoutX="796.0" layoutY="575.0" mnemonicParsing="false" onAction="#Cancel_onClick" prefHeight="30.0" prefWidth="70.0" text="Annuler" />
+		<Button layoutX="980.0" layoutY="575.0" mnemonicParsing="false" onAction="#Submit_onClick" prefHeight="30.0" prefWidth="70.0" text="Valider" />
+		<TableView fx:id="tableView" layoutX="30.0" layoutY="30.0" prefHeight="660.0" prefWidth="700.0">
+			<columns>
+				<TableColumn fx:id="urgencyCol" maxWidth="70.0" minWidth="-1.0" prefWidth="70.0" resizable="false" text="Urgence" />
+				<TableColumn fx:id="typeCol" maxWidth="100.0" minWidth="-1.0" prefWidth="100.0" resizable="false" text="Type Incident" />
+				<TableColumn fx:id="titleCol" maxWidth="240.0" minWidth="-1.0" prefWidth="240.0" text="Titre" />
+				<TableColumn fx:id="locationCol" maxWidth="160.0" minWidth="-1.0" prefWidth="160.0" text="Lieu" />
+				<TableColumn fx:id="dateTimeCol" maxWidth="130.0" minWidth="-1.0" prefWidth="130.0" text="DateHeure" />
+			</columns>
+		</TableView>
+		<TextField fx:id="txtTitle" layoutX="796.0" layoutY="171.0" prefHeight="30.0" prefWidth="254.0" promptText="Titre" />
+		<Label contentDisplay="CENTER" layoutX="796.0" layoutY="125.0" prefHeight="26.0" prefWidth="164.0" text="Nouvel Incident :" textAlignment="CENTER" underline="true">
+			<font>
+				<Font size="20.0" />
+			</font>
+		</Label>
+		<ComboBox fx:id="ddlType" layoutX="796.0" layoutY="221.0" prefHeight="27.0" prefWidth="254.0" promptText="Type d'incident" />
+		<TextArea fx:id="txtDescription" layoutX="796.0" layoutY="268.0" prefHeight="53.0" prefWidth="254.0" promptText="Description de l'incident" />
+		<ComboBox fx:id="ddlBuilding" layoutX="796.0" layoutY="341.0" prefHeight="27.0" prefWidth="115.0" promptText="Bâtiment *" />
+		<ComboBox fx:id="ddlRoom" disable="true" layoutX="935.0" layoutY="341.0" prefHeight="27.0" prefWidth="115.0" promptText="Salle *" />
+		<Slider fx:id="urgencySlider" blockIncrement="1.0" layoutX="796.0" layoutY="462.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="254.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+		<Label layoutX="779.0" layoutY="488.0" text="mineure" textFill="#01e110" />
+		<Label layoutX="1017.0" layoutY="488.0" text="majeure" textFill="#ff0000"/>
+		<Label layoutX="796.0" layoutY="435.0" text="Urgence * :" underline="true" />
+		<Label layoutX="847.0" layoutY="488.0" text="faible" textFill="#008c1f" />
+		<Label layoutX="895.0" layoutY="488.0" text="modérée" textFill="#005eff" />
+		<Label layoutX="961.0" layoutY="488.0" text="grande" textFill="#ff7700" />
+		<TextField fx:id="txtAuthor" layoutX="796.0" layoutY="525.0" prefHeight="30.0" prefWidth="254.0" promptText="Nom du déclarant" />
+		<Separator layoutX="760.0" layoutY="30.0" orientation="VERTICAL" prefHeight="660.0" prefWidth="0.0" />
+		<Label layoutX="795.0" layoutY="676.0" text="* = optionnel">
+			<font>
+				<Font size="11.0" />
+			</font>
+		</Label>
+      <JFXDatePicker fx:id="datePicker" defaultColor="#868686" layoutX="795.0" layoutY="388.0" prefHeight="27.0" prefWidth="115.0" />
+      <JFXTimePicker fx:id="timePicker" defaultColor="#868686" layoutX="935.0" layoutY="388.0" prefHeight="27.0" prefWidth="115.0" />
+	</children>
+</AnchorPane>
