@@ -34,9 +34,12 @@ public class App extends Application
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainView.fxml"));
             primaryStage.setTitle("Déclaration d'incident Polytech");
             Scene scene = new Scene(root, 1080, 720);
+
+            primaryStage.setMinWidth(1080);
+            primaryStage.setMinHeight(720);
+
             addStyleSheet(scene);
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
             primaryStage.show();
         }
         catch (NullPointerException | IOException e)
