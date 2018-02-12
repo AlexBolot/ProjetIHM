@@ -10,6 +10,8 @@ import projet.ihm.model.Incident;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static projet.ihm.Const.*;
+
 /**
  Hello world!
  */
@@ -31,7 +33,9 @@ public class App extends Application
             //noinspection ConstantConditions
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainView.fxml"));
             primaryStage.setTitle("Déclaration d'incident Polytech");
-            primaryStage.setScene(new Scene(root, 1080, 720));
+            Scene scene = new Scene(root, 1080, 720);
+            addStyleSheet(scene);
+            primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             primaryStage.show();
         }

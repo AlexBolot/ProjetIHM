@@ -22,6 +22,7 @@ public class Const
             //noinspection ConstantConditions
             Parent root = FXMLLoader.load(Const.class.getClassLoader().getResource(fileName));
             Scene scene = new Scene(root, 1080, 720);
+            addStyleSheet(scene);
             stage.setScene(scene);
             stage.show();
         }
@@ -43,6 +44,7 @@ public class Const
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 780, 557);
+            addStyleSheet(scene);
             Stage stage = new Stage();
             stage.setTitle(newTitle);
             stage.setScene(scene);
@@ -101,5 +103,10 @@ public class Const
                 }
             }
         });
+    }
+
+    public static void addStyleSheet(@NotNull Scene scene)
+    {
+       scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
     }
 }

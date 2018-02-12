@@ -65,7 +65,7 @@ public class AddController
             else
             {
                 ArrayList<Room> interestingRooms = new ArrayList<>(Arrays.asList(Room.values()));
-                interestingRooms.removeIf(room -> room.value() != building);
+                interestingRooms.removeIf(room -> room.value() != building && room.value() != null);
 
                 ddlRoom.getItems().clear();
                 ddlRoom.getItems().addAll(interestingRooms);
@@ -99,6 +99,9 @@ public class AddController
 
             return new SimpleStringProperty(date + " " + time);
         });
+
+        timePicker.setIs24HourView(true);
+
     }
 
     public void Cancel_onClick ()
