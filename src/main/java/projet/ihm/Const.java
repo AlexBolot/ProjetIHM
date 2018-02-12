@@ -15,13 +15,16 @@ import java.io.IOException;
 
 public class Const
 {
+    @SuppressWarnings ("ConstantConditions")
     public static void goTo (@NotNull String fileName, @NotNull Stage stage)
     {
         try
         {
-            //noinspection ConstantConditions
             Parent root = FXMLLoader.load(Const.class.getClassLoader().getResource(fileName));
             Scene scene = new Scene(root, 1080, 720);
+
+            scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
+
             addStyleSheet(scene);
             stage.setScene(scene);
             stage.show();
@@ -105,8 +108,8 @@ public class Const
         });
     }
 
-    public static void addStyleSheet(@NotNull Scene scene)
+    public static void addStyleSheet (@NotNull Scene scene)
     {
-       scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
+        scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
     }
 }
