@@ -1,3 +1,7 @@
+.missedField {
+    -fx-border-color: #d20000 !important;
+    -fx-border-radius: 3 !important;
+}
 .nofocus { -fx-focus-color: transparent;
         -fx-faint-focus-color: transparent;
 }

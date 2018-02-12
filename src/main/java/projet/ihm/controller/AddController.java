@@ -101,7 +101,6 @@ public class AddController
         });
 
         timePicker.setIs24HourView(true);
-
     }
 
     public void Cancel_onClick ()
@@ -111,6 +110,14 @@ public class AddController
 
     public void Submit_onClick ()
     {
+        boolean missingField;
+
+        txtTitle.getStyleClass().add("missedField");
+
+        missingField = checkMissedField(txtTitle);
+        missingField |= checkMissedField(txtAuthor);
+        missingField |= checkMissedField(ddlType);
+
         String title = txtTitle.getText().trim();
         String author = txtAuthor.getText().trim();
         String description = txtDescription.getText().trim();
@@ -147,6 +154,8 @@ public class AddController
                 urgency = NotPrecised;
         }
 
+        if (missingField) return;
+
         Incident incident = new Incident(title, author, description, type, building, room, urgency, date, time);
 
         incident.addToSave();
@@ -157,5 +166,44 @@ public class AddController
     private void goBackToMain ()
     {
         goTo("MainView.fxml", (Stage) tableView.getScene().getWindow());
+    }
+
+
+    //Méthode pas très lisible mais j'ai pas vraiment mieux à offrir...
+    private boolean checkMissedField (Control control)
+    {
+        if (control instanceof TextField)
+        {
+            TextField textField = (TextField) control;
+
+            if (textField.getText().isEmpty())
+            {
+                textField.getStyleClass().add("missedField");
+                return true;
+            }
+            else
+            {
+                textField.getStyleClass().removeAll("missedField");
+                return false;
+            }
+        }
+
+        if (control instanceof ComboBox)
+        {
+            ComboBox comboBox = (ComboBox) control;
+
+            if (comboBox.getSelectionModel().isEmpty())
+            {
+                comboBox.getStyleClass().add("missedField");
+                return true;
+            }
+            else
+            {
+                comboBox.getStyleClass().removeAll("missedField");
+                return false;
+            }
+        }
+
+        return false;
     }
 }
