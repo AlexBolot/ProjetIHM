@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import projet.ihm.controller.DetailedController;
@@ -68,42 +70,52 @@ public class Const
             {
                 super.updateItem(item, empty);
 
+                Color color = null;
+
                 if (item == null || empty)
                 {
-                    setText(null);
                     setStyle("");
+                    setGraphic(null);
+                    return;
                 }
                 else
                 {
-                    setText("");
-
                     switch (Urgency.valueOf(item))
                     {
                         case Mineure:
-                            setStyle("-fx-background-color: #01e110");
+                            color = Color.rgb(1, 225, 16, 1);
                             break;
 
                         case Faible:
-                            setStyle("-fx-background-color: #008c1f");
+                            color = Color.rgb(0, 140, 31, 1);
                             break;
 
                         case Moderee:
-                            setStyle("-fx-background-color: #005eff");
+                            color = Color.rgb(0, 94, 255, 1);
                             break;
 
                         case Grande:
-                            setStyle("-fx-background-color: #ff7700");
+                            color = Color.rgb(255, 119, 0, 1);
                             break;
 
                         case Majeure:
-                            setStyle("-fx-background-color: #ff0000");
+                            color = Color.rgb(255, 0, 0, 1);
                             break;
 
                         default:
-                            setStyle("");
                             break;
                     }
                 }
+
+                Rectangle rect = new Rectangle();
+
+                rect.heightProperty().bind(heightProperty().subtract(15));
+                rect.widthProperty().bind(widthProperty().subtract(10));
+                rect.setStroke(color);
+                rect.setFill(color);
+
+                setGraphic(rect);
+                getStyleClass().add("padding5");
             }
         });
     }
