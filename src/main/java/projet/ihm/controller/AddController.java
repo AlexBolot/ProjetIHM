@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static projet.ihm.Const.goTo;
@@ -39,6 +40,14 @@ public class AddController
     public Slider        urgencySlider;
     public JFXDatePicker datePicker;
     public JFXTimePicker timePicker;
+
+    public Label lblUrgency1;
+    public Label lblUrgency2;
+    public Label lblUrgency3;
+    public Label lblUrgency4;
+    public Label lblUrgency5;
+
+    private HashMap<Double, Label> labelMap;
 
     @FXML
     public void initialize ()
@@ -73,7 +82,32 @@ public class AddController
             }
         });
 
+        labelMap = new HashMap<Double, Label>()
+        {{
+            put(1d, lblUrgency1);
+            put(2d, lblUrgency2);
+            put(3d, lblUrgency3);
+            put(4d, lblUrgency4);
+            put(5d, lblUrgency5);
+        }};
+
         urgencySlider.setValue(3);
+        urgencySlider.valueProperty().addListener(event -> {
+            double value = urgencySlider.getValue();
+
+            labelMap.forEach((aDouble, label) -> {
+                if (aDouble == value)
+                {
+                    label.setScaleX(1.4);
+                    label.setScaleY(1.4);
+                }
+                else
+                {
+                    label.setScaleX(1);
+                    label.setScaleY(1);
+                }
+            });
+        });
 
         datePicker.setValue(LocalDate.now());
         timePicker.setValue(LocalTime.now());
@@ -84,21 +118,32 @@ public class AddController
         titleCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().title()));
         typeCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().type().toString()));
         urgencyCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().urgency().toString()));
+
         setUpUrgencyFactory(urgencyCol);
-        locationCol.setCellValueFactory(p -> {
+        locationCol.setCellValueFactory(p ->
 
-            String building = (p.getValue().building() == null) ? "" : p.getValue().building().toString();
-            String room = (p.getValue().room() == null) ? "" : p.getValue().room().toString();
+                                        {
 
-            return new SimpleStringProperty(building + " " + room);
-        });
-        dateTimeCol.setCellValueFactory(p -> {
+                                            String building = (p.getValue().building() == null) ? "" : p.getValue().building().toString();
+                                            String room = (p.getValue().room() == null) ? "" : p.getValue().room().toString();
 
-            String date = (p.getValue().date() == null) ? "" : p.getValue().date().format(DateTimeFormatter.ofPattern("dd/MM/uu"));
-            String time = (p.getValue().time() == null) ? "" : p.getValue().time().truncatedTo(MINUTES).toString();
+                                            return new SimpleStringProperty(building + " " + room);
+                                        });
+        dateTimeCol.setCellValueFactory(p ->
 
-            return new SimpleStringProperty(date + " " + time);
-        });
+                                        {
+
+                                            String date = (p.getValue().date() == null) ? "" : p.getValue()
+                                                                                                .date()
+                                                                                                .format(DateTimeFormatter.ofPattern(
+                                                                                                        "dd/MM/uu"));
+                                            String time = (p.getValue().time() == null) ? "" : p.getValue()
+                                                                                                .time()
+                                                                                                .truncatedTo(MINUTES)
+                                                                                                .toString();
+
+                                            return new SimpleStringProperty(date + " " + time);
+                                        });
 
         timePicker.setIs24HourView(true);
     }

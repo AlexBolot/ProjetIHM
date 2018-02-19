@@ -38,12 +38,12 @@
 		<ComboBox fx:id="ddlBuilding" layoutX="796.0" layoutY="341.0" prefHeight="27.0" prefWidth="115.0" promptText="Bâtiment" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="341.0" />
 		<ComboBox fx:id="ddlRoom" disable="true" layoutX="935.0" layoutY="341.0" prefHeight="27.0" prefWidth="115.0" promptText="Salle" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="341.0" />
 		<Slider fx:id="urgencySlider" blockIncrement="1.0" layoutX="796.0" layoutY="462.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="254.0" showTickMarks="true" snapToTicks="true" value="1.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="462.0" />
-		<Label layoutX="779.0" layoutY="488.0" text="mineure" textFill="#01e110" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="488.0" />
-		<Label layoutX="1017.0" layoutY="488.0" text="majeure" textFill="#ff0000" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="488.0" />
+		<Label fx:id="lblUrgency1" layoutX="779.0" layoutY="488.0" text="mineure" textFill="#01e110" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="488.0" />
+		<Label fx:id="lblUrgency5" layoutX="1017.0" layoutY="488.0" text="majeure" textFill="#ff0000" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="488.0" />
 		<Label layoutX="796.0" layoutY="435.0" text="Urgence :" underline="true" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="435.0" />
-		<Label layoutX="847.0" layoutY="488.0" text="faible" textFill="#008c1f" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="488.0" />
-		<Label layoutX="895.0" layoutY="488.0" text="modérée" textFill="#005eff" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="488.0" />
-		<Label layoutX="961.0" layoutY="488.0" text="grande" textFill="#ff7700" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="488.0" />
+		<Label fx:id="lblUrgency2" layoutX="847.0" layoutY="488.0" text="faible" textFill="#008c1f" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="488.0" />
+		<Label fx:id="lblUrgency3" layoutX="895.0" layoutY="488.0" text="modérée" textFill="#005eff" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="488.0" />
+		<Label fx:id="lblUrgency4" layoutX="961.0" layoutY="488.0" text="grande" textFill="#ff7700" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="488.0" />
 		<TextField fx:id="txtAuthor" layoutX="796.0" layoutY="525.0" prefHeight="30.0" prefWidth="254.0" promptText="Nom du déclarant *" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="525.0" />
 		<Separator layoutX="760.0" layoutY="30.0" orientation="VERTICAL" prefHeight="660.0" prefWidth="0.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="314.0" AnchorPane.topAnchor="30.0" />
 		<Label layoutX="795.0" layoutY="636.0" text="* = obligatoire" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="636.0">
