@@ -17,6 +17,13 @@ import java.io.IOException;
 
 public class Const
 {
+
+    public static final double LOGIN_WIDTH = 500;
+    public static final double LOGIN_HEIGHT = 325;
+
+    public static final double MAIN_WIDTH = 1080;
+    public static final double MAIN_HEIGHT = 720;
+
     @SuppressWarnings ("ConstantConditions")
     public static void goTo (@NotNull String fileName, @NotNull Stage stage)
     {

@@ -20,6 +20,8 @@ public class MainController
     public TableColumn<Incident, String> locationCol;
     public TableColumn<Incident, String> dateTimeCol;
     public Button                        btnDetailed;
+    private Button                       btnDeco;
+
 
     @FXML
     public void initialize ()
@@ -64,5 +66,9 @@ public class MainController
         Incident incident = tableView.getSelectionModel().getSelectedItem();
 
         openDetailed_newWindow("Detailed view", incident);
+    }
+
+    public void Deco_onClick() {
+        goTo("Login.fxml", (Stage) tableView.getScene().getWindow());
     }
 }
