@@ -15,9 +15,9 @@
    <children>
       <VBox alignment="CENTER" layoutX="28.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
          <children>
-            <ImageView fitHeight="62.0" fitWidth="200.0" nodeOrientation="INHERIT">
+            <ImageView fx:id="logo_polytech" fitHeight="62.0" fitWidth="200.0" nodeOrientation="INHERIT">
                <image>
-                  <Image url="@/images/logo_polytech.png" />
+                  <Image url="@/images/Polytechnicesophia.png" />
                </image>
             </ImageView>
             <Label text="Plateforme de déclaration d'indicent">

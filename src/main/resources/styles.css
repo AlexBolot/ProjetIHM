@@ -5,3 +5,28 @@
 .nofocus { -fx-focus-color: transparent;
         -fx-faint-focus-color: transparent;
 }
+
+#logo_polytech:hover {
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
+    -fx-scale-z: 1.4;
+}
+
+#urgencyCol:hover,
+#typeCol:hover,
+#titleCol:hover,
+#locationCol:hover,
+#dateTimeCol:hover {
+    -fx-font-weight: bold;
+}
+
+#txtTitle:hover,
+#txtBuildingRoom:hover,
+#txtDescription:hover,
+#txtAuthor:hover,
+#txtType:hover,
+#txtDateHour:hover,
+#txtUrgency:hover {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
