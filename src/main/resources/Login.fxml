@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Box?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.ihm.controller.LoginController">
+   <children>
+      <VBox alignment="CENTER" layoutX="28.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <ImageView fitHeight="62.0" fitWidth="200.0" nodeOrientation="INHERIT">
+               <image>
+                  <Image url="@/images/logo_polytech.png" />
+               </image>
+            </ImageView>
+            <Label text="Plateforme de déclaration d'indicent">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Box depth="100" height="10.0" opacity="0.0" width="100.0" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="495.0" text="Login" textAlignment="CENTER" />
+                  <TextField fx:id="login" prefHeight="31.0" prefWidth="220.0" onKeyPressed="#onKeyPressed"/>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="495.0" text="Password" textAlignment="CENTER" />
+                  <TextField fx:id="password" onKeyPressed="#onKeyPressed" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
