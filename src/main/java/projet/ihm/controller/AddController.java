@@ -16,8 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
-import static projet.ihm.Const.goTo;
-import static projet.ihm.Const.setUpUrgencyFactory;
+import static projet.ihm.Const.*;
 import static projet.ihm.model.Urgency.*;
 
 public class AddController
@@ -210,7 +209,7 @@ public class AddController
 
     private void goBackToMain ()
     {
-        goTo("MainView.fxml", (Stage) tableView.getScene().getWindow());
+        goTo("MainView.fxml", (Stage) tableView.getScene().getWindow(), MAIN_WIDTH, MAIN_HEIGHT);
     }
 
 

@@ -8,10 +8,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import projet.ihm.Const;
 import projet.ihm.model.Account;
 
-import static projet.ihm.Const.goTo;
+import static projet.ihm.Const.*;
 
 
 public class LoginController {
@@ -61,10 +60,8 @@ public class LoginController {
 
                 if (account.getPasswordHash() == passwordHash){
                     Stage stage = (Stage) loginPane.getScene().getWindow();
-                    stage.setMinWidth(Const.MAIN_WIDTH);
-                    stage.setMinHeight(Const.MAIN_HEIGHT);
 
-                    goTo("MainView.fxml", (Stage) submit.getScene().getWindow());
+                    goTo("MainView.fxml", stage, MAIN_WIDTH, MAIN_HEIGHT);
                 }else{
                     password.getStyleClass().add("missedField");
 

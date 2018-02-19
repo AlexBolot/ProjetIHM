@@ -25,12 +25,18 @@ public class Const
     public static final double MAIN_HEIGHT = 720;
 
     @SuppressWarnings ("ConstantConditions")
-    public static void goTo (@NotNull String fileName, @NotNull Stage stage)
+    public static void goTo (@NotNull String fileName, @NotNull Stage stage, double width, double height)
     {
         try
         {
+            stage.setWidth(width);
+            stage.setHeight(height);
+
+            stage.setMinWidth(width);
+            stage.setMinHeight(height);
+
             Parent root = FXMLLoader.load(Const.class.getClassLoader().getResource(fileName));
-            Scene scene = new Scene(root, 1080, 720);
+            Scene scene = new Scene(root, width, height);
 
             scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
 

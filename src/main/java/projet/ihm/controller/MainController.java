@@ -2,7 +2,9 @@ package projet.ihm.controller;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import projet.ihm.model.Incident;
 
@@ -58,7 +60,7 @@ public class MainController
 
     public void Add_onClick ()
     {
-        goTo("AddView.fxml", (Stage) tableView.getScene().getWindow());
+        goTo("AddView.fxml", (Stage) tableView.getScene().getWindow(), MAIN_WIDTH, MAIN_HEIGHT);
     }
 
     public void Detailed_onClick ()
@@ -69,6 +71,6 @@ public class MainController
     }
 
     public void Deco_onClick() {
-        goTo("Login.fxml", (Stage) tableView.getScene().getWindow());
+        goTo("Login.fxml", (Stage) tableView.getScene().getWindow(), LOGIN_WIDTH, LOGIN_HEIGHT);
     }
 }
