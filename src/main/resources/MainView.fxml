@@ -14,7 +14,7 @@
 				<TableColumn fx:id="dateTimeCol" maxWidth="150.0" minWidth="-1.0" prefWidth="150.0" text="DateHeure"/>
 			</columns>
 		</TableView>
-		<Button onAction="#Add_onClick" layoutX="930.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Ajouter Incident"/>
+		<Button onAction="#Add_onClick" layoutX="930.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="Ajouter Incident"/>
 		<Button fx:id="btnDetailed" onAction="#Detailed_onClick" layoutX="930.0" layoutY="660.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Vue détaillée"/>
 		<Separator layoutX="894.0" layoutY="30.0" orientation="VERTICAL" prefHeight="660.0" prefWidth="0.0"/>
 	</children>
