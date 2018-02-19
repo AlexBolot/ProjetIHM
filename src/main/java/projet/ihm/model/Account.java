@@ -7,7 +7,9 @@ public class Account {
 
     public static final List<Account> accounts = new ArrayList<Account>()
                                                 {{
+                                                    //mdp:cestpasfaux
                                                     add(new Account("Charles Ranger",1928682653));
+                                                    //mdp:lhermite
                                                     add(new Account("Bernard", 56234934));
                                                 }};
 

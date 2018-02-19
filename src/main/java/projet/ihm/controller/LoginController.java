@@ -1,10 +1,16 @@
 package projet.ihm.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import projet.ihm.model.Account;
+
+import static projet.ihm.Const.goTo;
+
 
 public class LoginController {
 
@@ -14,30 +20,49 @@ public class LoginController {
     @FXML
     private TextField password;
 
+
+    @FXML
+    private Button submit;
+
     @FXML
     void onKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
-            checkIdentifiers(login.getText(), password.getText().hashCode());
+            checkIdentifiers();
         }
+    }
+
+    @FXML
+    void onSubmit(ActionEvent event) {
+        checkIdentifiers();
     }
 
     @FXML
     void initialize() {
         assert login != null : "fx:id=\"login\" was not injected: check your FXML file 'Login.fxml'.";
         assert password != null : "fx:id=\"password\" was not injected: check your FXML file 'Login.fxml'.";
+        assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'Login.fxml'.";
     }
 
-    private void checkIdentifiers(String login, int passwordHash) {
+    private void checkIdentifiers() {
+
+        int passwordHash = password.getText().hashCode();
+        boolean accountNotFound = true;
 
         for (Account account : Account.accounts) {
 
-            if (account.getName().equals(login)) {
-                if (account.getPasswordHash() == passwordHash) {
-                    //OK
-                }
-                //mettre mot de passe en rouge
+            if (account.getName().equals(login.getText())) {
+                accountNotFound = false;
+                if (account.getPasswordHash() == passwordHash)
+                    goTo("MainView.fxml", (Stage) submit.getScene().getWindow());
+                else
+                    password.getStyleClass().add("missedField");
+
             }
         }
-        //mettre login et mot de passe en rouge
+        if (accountNotFound){
+            login.getStyleClass().add("missedField");
+            password.getStyleClass().add("missedField");
+        }
+
     }
 }

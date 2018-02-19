@@ -31,7 +31,7 @@ public class App extends Application
         try
         {
             //noinspection ConstantConditions
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
             primaryStage.setTitle("Déclaration d'incident Polytech");
             Scene scene = new Scene(root, 1080, 720);
 
