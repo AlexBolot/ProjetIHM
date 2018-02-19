@@ -2,7 +2,7 @@ package projet.ihm.model;
 
 public enum Building
 {
-    NotPrecised,
+    Non_Precisé,
     BatE,
     BatO,
     Parking,

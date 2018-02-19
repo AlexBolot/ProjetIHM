@@ -26,9 +26,9 @@ public class Incident implements Serializable
              author,
              description,
              type,
-             Building.NotPrecised,
-             Room.NotPrecised,
-             Urgency.NotPrecised,
+             Building.Non_Precisé,
+             Room.Non_Precisé,
+             Urgency.Non_précisée,
              LocalDate.now(),
              LocalTime.now());
     }

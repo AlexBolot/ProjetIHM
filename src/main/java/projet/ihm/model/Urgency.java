@@ -2,7 +2,7 @@ package projet.ihm.model;
 
 public enum Urgency
 {
-    NotPrecised,
+    Non_précisée,
     Mineure,
     Faible,
     Moderee,

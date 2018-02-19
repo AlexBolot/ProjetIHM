@@ -56,11 +56,11 @@ public class AddController
 
             Building building = ddlBuilding.getSelectionModel().getSelectedItem();
 
-            if (building == Building.NotPrecised)
+            if (building == Building.Non_Precisé)
             {
                 ddlRoom.getItems().clear();
                 ddlRoom.setDisable(true);
-                ddlRoom.getSelectionModel().select(Room.NotPrecised);
+                ddlRoom.getSelectionModel().select(Room.Non_Precisé);
             }
             else
             {
@@ -151,7 +151,7 @@ public class AddController
                 urgency = Majeure;
                 break;
             default:
-                urgency = NotPrecised;
+                urgency = Non_précisée;
         }
 
         if (missingField) return;

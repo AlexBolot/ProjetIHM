@@ -6,7 +6,7 @@ import static projet.ihm.model.Building.*;
 
 public enum Room
 {
-    NotPrecised(null),
+    Non_Precisé(null),
     P1(Parking),
     P2(Parking),
     P3(Parking),
@@ -15,8 +15,10 @@ public enum Room
     O109(BatO),
     O318(BatO),
     O234(BatO),
+    E130(BatE),
     E123(BatE),
-    E345(BatE),
+    E135(BatE),
+    E145(BatE),
     E134(BatE);
 
     private Building value;
