@@ -33,10 +33,10 @@ public class App extends Application
             //noinspection ConstantConditions
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Login.fxml"));
             primaryStage.setTitle("Déclaration d'incident Polytech");
-            Scene scene = new Scene(root, Const.LOGIN_WIDTH, Const.LOGIN_HEIGHT);
+            Scene scene = new Scene(root, LOGIN_WIDTH, LOGIN_HEIGHT);
 
-            primaryStage.setMinWidth(Const.LOGIN_WIDTH);
-            primaryStage.setMinHeight(Const.LOGIN_HEIGHT);
+            primaryStage.setMinWidth(LOGIN_WIDTH);
+            primaryStage.setMinHeight(LOGIN_HEIGHT);
 
             addStyleSheet(scene);
             primaryStage.setScene(scene);

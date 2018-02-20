@@ -2,8 +2,10 @@
     -fx-border-color: #d20000 !important;
     -fx-border-radius: 3 !important;
 }
-.nofocus { -fx-focus-color: transparent;
-        -fx-faint-focus-color: transparent;
+
+.nofocus {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 #logo_polytech:hover {
@@ -20,4 +22,28 @@
 #txtDateHour:hover,
 #txtUrgency:hover {
     -fx-font-size: 16px;
+}
+
+.mineurLabel {
+    -fx-background-color: #01e110;
+}
+
+.faibleLabel {
+    -fx-background-color: #008c1f;
+}
+
+.modereeLabel {
+    -fx-background-color: #005eff;
+}
+
+.grandeLabel {
+    -fx-background-color: #ff7700;
+}
+
+.majeurLabel {
+    -fx-background-color: #ff0000;
+}
+
+.padding5 {
+    -fx-padding: 5;
 }
