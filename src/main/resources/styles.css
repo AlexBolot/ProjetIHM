@@ -14,14 +14,6 @@
     -fx-scale-z: 1.4;
 }
 
-#urgencyCol:hover,
-#typeCol:hover,
-#titleCol:hover,
-#locationCol:hover,
-#dateTimeCol:hover {
-    -fx-font-weight: bold;
-}
-
 #txtTitle:hover,
 #txtBuildingRoom:hover,
 #txtDescription:hover,
@@ -29,7 +21,6 @@
 #txtType:hover,
 #txtDateHour:hover,
 #txtUrgency:hover {
-    -fx-font-weight: bold;
     -fx-font-size: 16px;
 }
 
