@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static projet.ihm.Const.*;
+import static projet.ihm.model.Account.currentLoggedIn;
 import static projet.ihm.model.Urgency.*;
 
 public class AddController
@@ -53,7 +54,7 @@ public class AddController
     {
         txtTitle.setText("");
         txtDescription.setText("");
-        txtAuthor.setText("");
+        txtAuthor.setText(currentLoggedIn == null ? "" : currentLoggedIn.getName());
 
         ddlType.getItems().clear();
         ddlType.getItems().addAll(IncidentType.values());

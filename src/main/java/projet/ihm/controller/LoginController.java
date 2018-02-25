@@ -1,6 +1,5 @@
 package projet.ihm.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -12,9 +11,8 @@ import projet.ihm.model.Account;
 
 import static projet.ihm.Const.*;
 
-
-public class LoginController {
-
+public class LoginController
+{
     @FXML
     private AnchorPane loginPane;
 
@@ -24,55 +22,59 @@ public class LoginController {
     @FXML
     private TextField password;
 
-
     @FXML
     private Button submit;
 
     @FXML
-    void onKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER){
-            checkIdentifiers();
-        }
+    void onKeyPressed (KeyEvent event)
+    {
+        if (event.getCode() == KeyCode.ENTER) checkIdentifiers();
     }
 
     @FXML
-    void onSubmit(ActionEvent event) {
+    void onSubmit ()
+    {
         checkIdentifiers();
     }
 
     @FXML
-    void initialize() {
+    void initialize ()
+    {
         assert loginPane != null : "fx:id=\"loginPane\" was not injected: check your FXML file 'Login.fxml'.";
         assert login != null : "fx:id=\"login\" was not injected: check your FXML file 'Login.fxml'.";
         assert password != null : "fx:id=\"password\" was not injected: check your FXML file 'Login.fxml'.";
         assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'Login.fxml'.";
     }
 
-    private void checkIdentifiers() {
-
-        int passwordHash = password.getText().hashCode();
+    private void checkIdentifiers ()
+    {
+        int passwordHash = password.getText().trim().hashCode();
         boolean accountNotFound = true;
 
-        for (Account account : Account.accounts) {
-
-            if (account.getName().equals(login.getText())) {
+        for (Account account : Account.accounts)
+        {
+            if (account.getName().equals(login.getText().trim()))
+            {
                 accountNotFound = false;
 
-                if (account.getPasswordHash() == passwordHash){
+                if (account.getPasswordHash() == passwordHash)
+                {
                     Stage stage = (Stage) loginPane.getScene().getWindow();
 
-                    goTo("MainView.fxml", stage, MAIN_WIDTH, MAIN_HEIGHT);
-                }else{
-                    password.getStyleClass().add("missedField");
+                    Account.currentLoggedIn = account;
 
+                    goTo("MainView.fxml", stage, MAIN_WIDTH, MAIN_HEIGHT);
+                }
+                else
+                {
+                    password.getStyleClass().add("missedField");
                 }
             }
-
         }
-        if (accountNotFound){
+        if (accountNotFound)
+        {
             login.getStyleClass().add("missedField");
             password.getStyleClass().add("missedField");
         }
-
     }
 }
