@@ -67,7 +67,7 @@ public class MainController
     {
         Incident incident = tableView.getSelectionModel().getSelectedItem();
 
-        openDetailed_newWindow("Detailed view", incident);
+        openDetailed_newWindow("Vue détaillée", incident);
     }
 
     public void Deco_onClick() {
