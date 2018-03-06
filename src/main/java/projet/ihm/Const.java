@@ -18,30 +18,31 @@ import java.io.IOException;
 public class Const
 {
 
-    public static final double LOGIN_WIDTH = 500;
+    public static final double LOGIN_WIDTH  = 500;
     public static final double LOGIN_HEIGHT = 325;
 
-    public static final double MAIN_WIDTH = 1080;
+    public static final double MAIN_WIDTH  = 1080;
     public static final double MAIN_HEIGHT = 720;
+
+    public static final double TableViewBorder = 2;
+
+    private static final Color lightGreen = Color.rgb(1, 225, 16, 1);
+    private static final Color darkGreen  = Color.rgb(0, 140, 31, 1);
+    private static final Color blue       = Color.rgb(0, 94, 255, 1);
+    private static final Color orange     = Color.rgb(255, 119, 0, 1);
+    private static final Color red        = Color.rgb(255, 0, 0, 1);
 
     @SuppressWarnings ("ConstantConditions")
     public static void goTo (@NotNull String fileName, @NotNull Stage stage, double width, double height)
     {
         try
         {
-            stage.setWidth(width);
-            stage.setHeight(height);
-
-            stage.setMinWidth(width);
-            stage.setMinHeight(height);
-
             Parent root = FXMLLoader.load(Const.class.getClassLoader().getResource(fileName));
             Scene scene = new Scene(root, width, height);
 
-            scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
-
             addStyleSheet(scene);
             stage.setScene(scene);
+            stage.sizeToScene();
             stage.show();
         }
         catch (IOException e)
@@ -63,6 +64,7 @@ public class Const
             Parent root = loader.load();
             Scene scene = new Scene(root, 780, 557);
             addStyleSheet(scene);
+
             Stage stage = new Stage();
             stage.setTitle(newTitle);
             stage.setScene(scene);
@@ -96,23 +98,23 @@ public class Const
                     switch (Urgency.valueOf(item))
                     {
                         case Mineure:
-                            color = Color.rgb(1, 225, 16, 1);
+                            color = lightGreen;
                             break;
 
                         case Faible:
-                            color = Color.rgb(0, 140, 31, 1);
+                            color = darkGreen;
                             break;
 
                         case Moderee:
-                            color = Color.rgb(0, 94, 255, 1);
+                            color = blue;
                             break;
 
                         case Grande:
-                            color = Color.rgb(255, 119, 0, 1);
+                            color = orange;
                             break;
 
                         case Majeure:
-                            color = Color.rgb(255, 0, 0, 1);
+                            color = red;
                             break;
 
                         default:
@@ -135,6 +137,7 @@ public class Const
 
     public static void addStyleSheet (@NotNull Scene scene)
     {
+        //noinspection ConstantConditions
         scene.getStylesheets().add(Const.class.getClassLoader().getResource("styles.css").toString());
     }
 }

@@ -12,15 +12,28 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class DetailedController
 {
-    public TextField txtType;
-    public TextField txtTitle;
-    public TextField txtAuthor;
-    public TextField txtUrgency;
-    public TextField txtDateHour;
-    public TextArea  txtDescription;
-    public TextField txtBuildingRoom;
+    @FXML
+    private TextField txtType;
 
-    private Incident  incident;
+    @FXML
+    private TextField txtTitle;
+
+    @FXML
+    private TextField txtAuthor;
+
+    @FXML
+    private TextField txtUrgency;
+
+    @FXML
+    private TextField txtDateHour;
+
+    @FXML
+    private TextArea txtDescription;
+
+    @FXML
+    private TextField txtBuildingRoom;
+
+    private Incident incident;
 
     public void setIncident (Incident incident)
     {

@@ -7,7 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import projet.ihm.model.Account;
+import projet.ihm.model.users.User;
 
 import static projet.ihm.Const.*;
 
@@ -49,19 +49,20 @@ public class LoginController
     private void checkIdentifiers ()
     {
         int passwordHash = password.getText().trim().hashCode();
-        boolean accountNotFound = true;
+        String loginName = login.getText().trim();
+        boolean accountFound = false;
 
-        for (Account account : Account.accounts)
+        for (User user : User.readFromSave())
         {
-            if (account.getName().equals(login.getText().trim()))
+            if(user.name().equals(loginName))
             {
-                accountNotFound = false;
+                accountFound = true;
 
-                if (account.getPasswordHash() == passwordHash)
+                if(user.passwordHash() == passwordHash)
                 {
                     Stage stage = (Stage) loginPane.getScene().getWindow();
 
-                    Account.currentLoggedIn = account;
+                    User.currentLoggedIn = user;
 
                     goTo("MainView.fxml", stage, MAIN_WIDTH, MAIN_HEIGHT);
                 }
@@ -71,7 +72,8 @@ public class LoginController
                 }
             }
         }
-        if (accountNotFound)
+
+        if (!accountFound)
         {
             login.getStyleClass().add("missedField");
             password.getStyleClass().add("missedField");
