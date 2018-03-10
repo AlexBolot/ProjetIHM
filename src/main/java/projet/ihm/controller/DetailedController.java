@@ -1,6 +1,7 @@
 package projet.ihm.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -40,6 +41,9 @@ public class DetailedController
 
     @FXML
     private ChoiceBox<String> ddlStatus;
+
+    @FXML
+    private Button btnSubmit;
 
     //endregion
 
@@ -84,6 +88,7 @@ public class DetailedController
 
         txtStatus.setVisible(!canUpdateStatus);
         ddlStatus.setVisible(canUpdateStatus);
+        btnSubmit.setVisible(canUpdateStatus);
     }
 
     public void Submit_onClick ()
