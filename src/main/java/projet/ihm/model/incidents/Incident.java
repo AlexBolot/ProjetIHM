@@ -1,4 +1,4 @@
-package projet.ihm.model;
+package projet.ihm.model.incidents;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -6,10 +6,16 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static projet.ihm.model.incidents.Status.TODO;
+
 public class Incident implements Serializable
 {
+    //region --------------- Attributes ----------------------
+
+    private static       double IDcount  = 0;
     private static final String savePath = "./IncidentsSaveFile.txt";
 
+    private double       ID;
     private Urgency      urgency;
     private Room         room;
     private String       title;
@@ -19,23 +25,21 @@ public class Incident implements Serializable
     private IncidentType type;
     private LocalDate    date;
     private LocalTime    time;
+    private Status       status;
+
+    //endregion
+
+    //region --------------- Constructors --------------------
 
     public Incident (String title, String author, String description, IncidentType type)
     {
-        this(title,
-             author,
-             description,
-             type,
-             Building.Non_Precisé,
-             Room.Non_Precisé,
-             Urgency.Non_précisée,
-             LocalDate.now(),
-             LocalTime.now());
+        this(title, author, description, type, Building.NONE, Room.NONE, Urgency.NONE, LocalDate.now(), LocalTime.now(), TODO);
     }
 
     public Incident (String title, String author, String description, IncidentType type, Building building, Room room, Urgency urgency,
-                     LocalDate date, LocalTime time)
+                     LocalDate date, LocalTime time, Status status)
     {
+        this.ID = ++IDcount;
         this.urgency = urgency;
         this.room = room;
         this.title = title;
@@ -45,7 +49,14 @@ public class Incident implements Serializable
         this.type = type;
         this.date = date;
         this.time = time;
+        this.status = status;
     }
+
+    //endregion
+
+    //region --------------- Getters - Setters ---------------
+
+    public double ID () { return this.ID; }
 
     public Room room () { return room; }
 
@@ -64,6 +75,14 @@ public class Incident implements Serializable
     public LocalDate date () { return date; }
 
     public LocalTime time () { return time; }
+
+    public Status status () { return this.status; }
+
+    public void setStatus (Status status) { this.status = status; }
+
+    //endregion
+
+    //region --------------- Read/Write Methods --------------
 
     public void addToSave ()
     {
@@ -107,20 +126,21 @@ public class Incident implements Serializable
         return new ArrayList<>();
     }
 
+    //endregion
+
+    //region --------------- Override Methods ----------------
+
     @Override
     public boolean equals (Object o)
     {
-        if (o == null || !(o instanceof Incident)) return false;
-
-        Incident incident = (Incident) o;
-        return urgency == incident.urgency && room == incident.room && Objects.equals(title, incident.title) && Objects.equals(author,
-                                                                                                                               incident.author) && Objects
-                .equals(description, incident.description) && building == incident.building && type == incident.type;
+        return o != null && o instanceof Incident && this.ID == ((Incident) o).ID;
     }
 
     @Override
     public int hashCode ()
     {
-        return Objects.hash(urgency, room, title, author, description, building, type);
+        return Objects.hash(urgency, room, title, author, description, building, type, date, time);
     }
+
+    //endregion
 }

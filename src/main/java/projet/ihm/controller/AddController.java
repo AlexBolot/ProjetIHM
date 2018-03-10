@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import projet.ihm.model.*;
+import projet.ihm.model.incidents.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,11 +23,14 @@ import java.util.HashMap;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static projet.ihm.Const.*;
-import static projet.ihm.model.Urgency.*;
+import static projet.ihm.model.incidents.Status.TODO;
+import static projet.ihm.model.incidents.Urgency.*;
 import static projet.ihm.model.users.User.currentLoggedIn;
 
 public class AddController
 {
+    //region --------------- FXML Attributes ---------------
+
     @FXML
     private AnchorPane sideAnchorPane;
 
@@ -44,6 +47,8 @@ public class AddController
     private TableColumn<Incident, String> locationCol;
     @FXML
     private TableColumn<Incident, String> dateTimeCol;
+    @FXML
+    private TableColumn<Incident, String> statusCol;
 
     @FXML
     private TextField txtTitle;
@@ -78,6 +83,8 @@ public class AddController
     @FXML
     private Label lblUrgency5;
 
+    //endregion
+
     private HashMap<Double, Label> labelMap;
 
     private static boolean activeView = false;
@@ -87,6 +94,12 @@ public class AddController
     {
         activeView = true;
 
+        //region --> init TableView data
+        tableView.getItems().clear();
+        tableView.getItems().addAll(Incident.readFromSave());
+        //endregion
+
+        //region --> init Adding Fields
         txtTitle.setText("");
         txtDescription.setText("");
         txtAuthor.setText(currentLoggedIn == null ? "" : currentLoggedIn.name());
@@ -100,16 +113,16 @@ public class AddController
 
             Building building = ddlBuilding.getSelectionModel().getSelectedItem();
 
-            if (building == Building.Non_Precisé)
+            if (building == Building.NONE)
             {
                 ddlRoom.getItems().clear();
                 ddlRoom.setDisable(true);
-                ddlRoom.getSelectionModel().select(Room.Non_Precisé);
+                ddlRoom.getSelectionModel().select(Room.NONE);
             }
             else
             {
                 ArrayList<Room> interestingRooms = new ArrayList<>(Arrays.asList(Room.values()));
-                interestingRooms.removeIf(room -> room.value() != building && room.value() != null);
+                interestingRooms.removeIf(room -> room.building() != building && room.building() != null);
 
                 ddlRoom.getItems().clear();
                 ddlRoom.getItems().addAll(interestingRooms);
@@ -146,21 +159,26 @@ public class AddController
 
         datePicker.setValue(LocalDate.now());
         timePicker.setValue(LocalTime.now());
+        timePicker.setIs24HourView(true);
+        //endregion
 
-        tableView.getItems().clear();
-        tableView.getItems().addAll(Incident.readFromSave());
-
+        //region --> init Columns CellFactories
         titleCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().title()));
-        typeCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().type().toString()));
-        urgencyCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().urgency().toString()));
+        typeCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().type().label()));
+        urgencyCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().urgency().label()));
+        urgencyCol.setComparator((o1, o2) -> {
+            Urgency u1 = getFromLabel(o1);
+            Urgency u2 = getFromLabel(o2);
 
+            return Integer.compare(u1.urgencyLevel(), u2.urgencyLevel());
+        });
         setUpUrgencyFactory(urgencyCol);
         locationCol.setCellValueFactory(p -> {
 
-            String building = (p.getValue().building() == null) ? "" : p.getValue().building().toString();
-            String room = (p.getValue().room() == null) ? "" : p.getValue().room().toString();
+            String building = (p.getValue().building() == null) ? "" : p.getValue().building().label();
+            String room = (p.getValue().room() == null) ? "" : p.getValue().room().label();
 
-            return new SimpleStringProperty(building + " " + room);
+            return new SimpleStringProperty(building + " - " + room);
         });
         dateTimeCol.setCellValueFactory(p -> {
 
@@ -169,8 +187,8 @@ public class AddController
 
             return new SimpleStringProperty(date + " " + time);
         });
-
-        timePicker.setIs24HourView(true);
+        statusCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().status().label()));
+        //endregion
 
         //noinspection Duplicates
         Platform.runLater(() -> {
@@ -195,6 +213,46 @@ public class AddController
         });
     }
 
+    //Méthode pas très lisible mais j'ai pas vraiment mieux à offrir...
+    private boolean checkMissedField (Control control)
+    {
+        if (control instanceof TextField)
+        {
+            TextField textField = (TextField) control;
+
+            if (textField.getText().isEmpty())
+            {
+                textField.getStyleClass().add("missedField");
+                return true;
+            }
+            else
+            {
+                textField.getStyleClass().removeAll("missedField");
+                return false;
+            }
+        }
+
+        if (control instanceof ComboBox)
+        {
+            ComboBox comboBox = (ComboBox) control;
+
+            if (comboBox.getSelectionModel().isEmpty())
+            {
+                comboBox.getStyleClass().add("missedField");
+                return true;
+            }
+            else
+            {
+                comboBox.getStyleClass().removeAll("missedField");
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    //region --------------- GUI methods -------------------
+
     @SuppressWarnings ("Duplicates")
     private double getMinWidth ()
     {
@@ -205,6 +263,7 @@ public class AddController
         minWidth += titleCol.getMinWidth();
         minWidth += locationCol.getWidth();
         minWidth += dateTimeCol.getWidth();
+        minWidth += statusCol.getWidth();
         minWidth += TableViewBorder;
 
         return AnchorPane.getLeftAnchor(tableView) + minWidth + AnchorPane.getRightAnchor(tableView);
@@ -248,12 +307,17 @@ public class AddController
         sizeLeft -= typeCol.getWidth();
         sizeLeft -= locationCol.getWidth();
         sizeLeft -= dateTimeCol.getWidth();
+        sizeLeft -= statusCol.getWidth();
         sizeLeft -= TableViewBorder;
 
         sizeLeft = Math.max(sizeLeft, titleCol.getMinWidth());
 
         titleCol.setPrefWidth(sizeLeft);
     }
+
+    //endregion
+
+    //region --------------- OnClick Methods ---------------
 
     public void Cancel_onClick ()
     {
@@ -303,12 +367,12 @@ public class AddController
                 urgency = Majeure;
                 break;
             default:
-                urgency = Non_précisée;
+                urgency = NONE;
         }
 
         if (missingField) return;
 
-        Incident incident = new Incident(title, author, description, type, building, room, urgency, date, time);
+        Incident incident = new Incident(title, author, description, type, building, room, urgency, date, time, TODO);
 
         incident.addToSave();
 
@@ -318,44 +382,8 @@ public class AddController
     private void goBackToMain ()
     {
         activeView = false;
-        goTo("MainView.fxml", (Stage) tableView.getScene().getWindow(), MAIN_WIDTH, MAIN_HEIGHT);
+        goTo("MainView.fxml", (Stage) tableView.getScene().getWindow(), MAIN_WIDTH, MAIN_HEIGHT, true);
     }
 
-    //Méthode pas très lisible mais j'ai pas vraiment mieux à offrir...
-    private boolean checkMissedField (Control control)
-    {
-        if (control instanceof TextField)
-        {
-            TextField textField = (TextField) control;
-
-            if (textField.getText().isEmpty())
-            {
-                textField.getStyleClass().add("missedField");
-                return true;
-            }
-            else
-            {
-                textField.getStyleClass().removeAll("missedField");
-                return false;
-            }
-        }
-
-        if (control instanceof ComboBox)
-        {
-            ComboBox comboBox = (ComboBox) control;
-
-            if (comboBox.getSelectionModel().isEmpty())
-            {
-                comboBox.getStyleClass().add("missedField");
-                return true;
-            }
-            else
-            {
-                comboBox.getStyleClass().removeAll("missedField");
-                return false;
-            }
-        }
-
-        return false;
-    }
+    //endregion
 }

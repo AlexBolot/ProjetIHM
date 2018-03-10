@@ -64,7 +64,7 @@ public class LoginController
 
                     User.currentLoggedIn = user;
 
-                    goTo("MainView.fxml", stage, MAIN_WIDTH, MAIN_HEIGHT);
+                    goTo("MainView.fxml", stage, MAIN_WIDTH, MAIN_HEIGHT, true);
                 }
                 else
                 {

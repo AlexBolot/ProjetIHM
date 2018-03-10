@@ -14,48 +14,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.ihm.controller.AddController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.ihm.controller.AddController">
 	<children>
 		<TableView fx:id="tableView" layoutX="30.0" layoutY="30.0" prefHeight="660.0" prefWidth="700.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="395.0" AnchorPane.topAnchor="30.0">
 			<columns>
 				<TableColumn fx:id="urgencyCol" maxWidth="1.7976931348623157E308" prefWidth="75.0" text="Urgence" />
 				<TableColumn fx:id="typeCol" maxWidth="1.7976931348623157E308" prefWidth="110.0" text="Type Incident" />
 				<TableColumn fx:id="titleCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" resizable="false" text="Titre" />
-				<TableColumn fx:id="locationCol" maxWidth="1.7976931348623157E308" prefWidth="170.0" text="Lieu" />
-				<TableColumn fx:id="dateTimeCol" maxWidth="1.7976931348623157E308" prefWidth="150.0" text="DateHeure" />
+				<TableColumn fx:id="locationCol" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Lieu" />
+				<TableColumn fx:id="dateTimeCol" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="DateHeure" />
+				<TableColumn fx:id="statusCol" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="Status" />
 			</columns>
 		</TableView>
 		<Separator layoutX="760.0" layoutY="30.0" orientation="VERTICAL" prefHeight="660.0" prefWidth="0.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="30.0" />
-      <AnchorPane fx:id="sideAnchorPane" layoutX="776.0" layoutY="25.0" prefHeight="580.0" prefWidth="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-         <children>
-      		<Label contentDisplay="CENTER" prefHeight="30.0" prefWidth="164.0" text="Nouvel Incident :" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-      			<font>
-      				<Font size="20.0" />
-      			</font>
-      		</Label>
-      		<TextField fx:id="txtTitle" layoutX="-100.0" layoutY="84.0" prefHeight="30.0" prefWidth="260.0" promptText="Titre *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
-      		<ComboBox fx:id="ddlType" layoutY="110.0" prefHeight="30.0" prefWidth="260.0" promptText="Type d'incident *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0" />
-      		<TextArea fx:id="txtDescription" layoutY="160.0" prefHeight="90.0" prefWidth="260.0" promptText="Description de l'incident" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0" />
-      		<ComboBox fx:id="ddlBuilding" layoutY="270.0" prefHeight="30.0" prefWidth="115.0" promptText="Bâtiment" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="270.0" />
-      		<ComboBox fx:id="ddlRoom" disable="true" layoutX="145.0" layoutY="270.0" prefHeight="30.0" prefWidth="115.0" promptText="Salle" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="270.0" />
-            <JFXDatePicker fx:id="datePicker" defaultColor="#656565" layoutY="320.0" prefHeight="30.0" prefWidth="115.0" promptText="Date" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="320.0" />
-            <JFXTimePicker fx:id="timePicker" defaultColor="#656565" editable="true" layoutX="145.0" layoutY="320.0" prefHeight="30.0" prefWidth="115.0" promptText="Heure" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="320.0" />
-      		<Label layoutY="370.0" text="Urgence :" underline="true" AnchorPane.leftAnchor="0.0" />
-      		<Slider fx:id="urgencySlider" blockIncrement="1.0" layoutX="20.0" layoutY="398.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="240.0" showTickMarks="true" snapToTicks="true" value="1.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-      		<Label fx:id="lblUrgency1" layoutX="3.0" layoutY="424.0" text="mineure" textFill="#01e110" />
-      		<Label fx:id="lblUrgency5" layoutX="247.0" layoutY="424.0" text="majeure" textFill="#ff0000" />
-      		<Label fx:id="lblUrgency2" layoutX="72.0" layoutY="424.0" text="faible" textFill="#008c1f" />
-      		<Label fx:id="lblUrgency3" layoutX="122.0" layoutY="424.0" text="modérée" textFill="#005eff" />
-      		<Label fx:id="lblUrgency4" layoutX="189.0" layoutY="424.0" text="grande" textFill="#ff7700" />
-      		<TextField fx:id="txtAuthor" layoutY="460.0" prefHeight="30.0" prefWidth="260.0" promptText="Nom du déclarant *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="460.0" />
-      		<Button layoutY="510.0" mnemonicParsing="false" onAction="#Cancel_onClick" prefHeight="30.0" prefWidth="80.0" text="Annuler" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="510.0" />
-      		<Button layoutX="180.0" layoutY="510.0" mnemonicParsing="false" onAction="#Submit_onClick" prefHeight="30.0" prefWidth="80.0" text="Valider" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="510.0" />
-      		<Label layoutY="560.0" prefHeight="20.0" text="* = obligatoire" AnchorPane.leftAnchor="0.0">
-      			<font>
-      				<Font size="11.0" />
-      			</font>
-      		</Label>
-         </children>
-      </AnchorPane>
+		<AnchorPane fx:id="sideAnchorPane" layoutX="776.0" layoutY="25.0" prefHeight="580.0" prefWidth="300.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+			<children>
+				<Label contentDisplay="CENTER" prefHeight="30.0" prefWidth="164.0" text="Nouvel Incident :" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Label>
+				<TextField fx:id="txtTitle" layoutX="-100.0" layoutY="84.0" prefHeight="30.0" prefWidth="260.0" promptText="Titre *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+				<ComboBox fx:id="ddlType" layoutY="110.0" prefHeight="30.0" prefWidth="260.0" promptText="Type d'incident *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0" />
+				<TextArea fx:id="txtDescription" layoutY="160.0" prefHeight="90.0" prefWidth="260.0" promptText="Description de l'incident" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0" />
+				<ComboBox fx:id="ddlBuilding" layoutY="270.0" prefHeight="30.0" prefWidth="115.0" promptText="Bâtiment" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="270.0" />
+				<ComboBox fx:id="ddlRoom" disable="true" layoutX="145.0" layoutY="270.0" prefHeight="30.0" prefWidth="115.0" promptText="Salle" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="270.0" />
+				<JFXDatePicker fx:id="datePicker" defaultColor="#656565" layoutY="320.0" prefHeight="30.0" prefWidth="115.0" promptText="Date" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="320.0" />
+				<JFXTimePicker fx:id="timePicker" defaultColor="#656565" editable="true" layoutX="145.0" layoutY="320.0" prefHeight="30.0" prefWidth="115.0" promptText="Heure" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="320.0" />
+				<Label layoutY="370.0" text="Urgence :" underline="true" AnchorPane.leftAnchor="0.0" />
+				<Slider fx:id="urgencySlider" blockIncrement="1.0" layoutX="20.0" layoutY="398.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="240.0" showTickMarks="true" snapToTicks="true" value="1.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+				<Label fx:id="lblUrgency1" layoutX="3.0" layoutY="424.0" text="mineure" textFill="#01e110" />
+				<Label fx:id="lblUrgency5" layoutX="247.0" layoutY="424.0" text="majeure" textFill="#ff0000" />
+				<Label fx:id="lblUrgency2" layoutX="72.0" layoutY="424.0" text="faible" textFill="#008c1f" />
+				<Label fx:id="lblUrgency3" layoutX="122.0" layoutY="424.0" text="modérée" textFill="#005eff" />
+				<Label fx:id="lblUrgency4" layoutX="189.0" layoutY="424.0" text="grande" textFill="#ff7700" />
+				<TextField fx:id="txtAuthor" layoutY="460.0" prefHeight="30.0" prefWidth="260.0" promptText="Nom du déclarant *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="460.0" />
+				<Button layoutY="510.0" mnemonicParsing="false" onAction="#Cancel_onClick" prefHeight="30.0" prefWidth="80.0" text="Annuler" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="510.0" />
+				<Button layoutX="180.0" layoutY="510.0" mnemonicParsing="false" onAction="#Submit_onClick" prefHeight="30.0" prefWidth="80.0" text="Valider" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="510.0" />
+				<Label layoutY="560.0" prefHeight="20.0" text="* = obligatoire" AnchorPane.leftAnchor="0.0">
+					<font>
+						<Font size="11.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
 	</children>
 </AnchorPane>

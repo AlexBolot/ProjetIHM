@@ -5,21 +5,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import projet.ihm.model.Incident;
+import projet.ihm.model.incidents.Incident;
 import projet.ihm.model.users.User;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static projet.ihm.Const.*;
+import static projet.ihm.model.incidents.Building.*;
+import static projet.ihm.model.incidents.IncidentType.*;
+import static projet.ihm.model.incidents.Room.*;
+import static projet.ihm.model.incidents.Status.*;
+import static projet.ihm.model.incidents.Urgency.*;
 
 /**
  Hello world!
  */
 public class App extends Application
 {
+    //clearIncidents addIncidents clearUsers addUsers
     public static void main (String[] args)
     {
         if (args != null)
@@ -30,7 +38,57 @@ public class App extends Application
             if (argsList.contains("clearUsers")) User.writeToSave(new ArrayList<>());
             if (argsList.contains("addIncidents"))
             {
-                //TODO Add incidents examples
+                Incident.writeToSave(new ArrayList<Incident>()
+                {{
+                    add(new Incident("On manque de feutres",
+                                     "bob",
+                                     "Il n'y a plus de feutres rouge et verts dans la salle...",
+                                     PlusDeFeutres));
+
+                    add(new Incident("Vitre briése amphi Est",
+                                     "alice",
+                                     "Un pigeon a volé droit dans la vitre...",
+                                     VitreBrisee,
+                                     BatE,
+                                     E134,
+                                     Moderee,
+                                     LocalDate.now(),
+                                     LocalTime.now(),
+                                     TODO));
+
+                    add(new Incident("Lampe clignotte au plafond",
+                                     "alice",
+                                     "Un néon clignotte au plafond de la salle, c'est désagréable...",
+                                     LampeCassee,
+                                     BatO,
+                                     O318,
+                                     Faible,
+                                     LocalDate.now(),
+                                     LocalTime.now(),
+                                     DOING));
+
+                    add(new Incident("Lampadaire cassé",
+                                     "marcel",
+                                     "Le lampadaire du parking ne s'allume plus...",
+                                     LampeCassee,
+                                     Parking,
+                                     P1,
+                                     Mineure,
+                                     LocalDate.now(),
+                                     LocalTime.now(),
+                                     DOING));
+
+                    add(new Incident("Stationnement gênant !",
+                                     "bob",
+                                     "Voiture immatriculée BR-542-KX m'empèche de déplacer ma voiture !!",
+                                     VoitureMalGaree,
+                                     Parking,
+                                     P2,
+                                     Majeure,
+                                     LocalDate.now(),
+                                     LocalTime.now(),
+                                     DONE));
+                }});
             }
             if (argsList.contains("addUsers"))
             {
@@ -61,6 +119,7 @@ public class App extends Application
 
             addStyleSheet(scene);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
         }
         catch (NullPointerException | IOException e)

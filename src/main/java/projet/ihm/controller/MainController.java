@@ -11,7 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import projet.ihm.model.Incident;
+import projet.ihm.model.incidents.Incident;
+import projet.ihm.model.incidents.Urgency;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,12 +24,15 @@ import java.util.stream.Collectors;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static javafx.scene.control.SelectionMode.MULTIPLE;
 import static projet.ihm.Const.*;
+import static projet.ihm.model.incidents.Urgency.getFromLabel;
 import static projet.ihm.model.users.Privileges.Privilege.AddIncident;
 import static projet.ihm.model.users.Privileges.Privilege.DeleteIncident;
 import static projet.ihm.model.users.User.currentLoggedIn;
 
 public class MainController
 {
+    //region --------------- FXML Attributes ---------------
+
     @FXML
     private AnchorPane sideAnchorPane;
 
@@ -45,6 +49,8 @@ public class MainController
     private TableColumn<Incident, String> locationCol;
     @FXML
     private TableColumn<Incident, String> dateTimeCol;
+    @FXML
+    private TableColumn<Incident, String> statusCol;
 
     @FXML
     private Button btnDetailed;
@@ -53,6 +59,8 @@ public class MainController
     @FXML
     private Button btnDelete;
 
+    //endregion
+
     private static boolean activeView = false;
 
     @FXML
@@ -60,6 +68,7 @@ public class MainController
     {
         activeView = true;
 
+        //region --> init TableView { data, selection_mode, listeners }
         tableView.getItems().clear();
         tableView.getItems().addAll(Incident.readFromSave());
         tableView.getSelectionModel().setSelectionMode(MULTIPLE);
@@ -67,17 +76,32 @@ public class MainController
             int selectionSize = tableView.getSelectionModel().getSelectedItems().size();
             btnDelete.setText(selectionSize > 1 ? "Supprimer incidents" : "Supprimer incident");
         });
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) btnDetailed.setVisible(true);
+            else btnDetailed.setVisible(false);
 
+            int selectionSize = tableView.getSelectionModel().getSelectedItems().size();
+            btnDelete.setText(selectionSize > 1 ? "Supprimer incidents" : "Supprimer incident");
+        });
+        //endregion
+
+        //region --> init Columns CellFactories
         titleCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().title()));
-        typeCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().type().toString()));
-        urgencyCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().urgency().toString()));
+        typeCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().type().label()));
+        urgencyCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().urgency().label()));
+        urgencyCol.setComparator((o1, o2) -> {
+            Urgency u1 = getFromLabel(o1);
+            Urgency u2 = getFromLabel(o2);
+
+            return Integer.compare(u1.urgencyLevel(), u2.urgencyLevel());
+        });
         setUpUrgencyFactory(urgencyCol);
         locationCol.setCellValueFactory(p -> {
 
-            String building = (p.getValue().building() == null) ? "" : p.getValue().building().toString();
-            String room = (p.getValue().room() == null) ? "" : p.getValue().room().toString();
+            String building = (p.getValue().building() == null) ? "" : p.getValue().building().label();
+            String room = (p.getValue().room() == null) ? "" : p.getValue().room().label();
 
-            return new SimpleStringProperty(building + " " + room);
+            return new SimpleStringProperty(building + " - " + room);
         });
         dateTimeCol.setCellValueFactory(p -> {
 
@@ -86,18 +110,14 @@ public class MainController
 
             return new SimpleStringProperty(date + " " + time);
         });
+        statusCol.setCellValueFactory(p -> new SimpleStringProperty(p.getValue().status().label()));
+        //endregion
 
+        //region --> init buttons visibility
         btnDetailed.setVisible(false);
         btnAdd.setVisible(currentLoggedIn != null && currentLoggedIn.hasPrivilege(AddIncident));
         btnDelete.setVisible(currentLoggedIn != null && currentLoggedIn.hasPrivilege(DeleteIncident));
-
-        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) btnDetailed.setVisible(true);
-            else btnDetailed.setVisible(false);
-
-            int selectionSize = tableView.getSelectionModel().getSelectedItems().size();
-            btnDelete.setText(selectionSize > 1 ? "Supprimer incidents" : "Supprimer incident");
-        });
+        //endregion
 
         //noinspection Duplicates
         Platform.runLater(() -> {
@@ -122,6 +142,8 @@ public class MainController
         });
     }
 
+    //region --------------- GUI methods -------------------
+
     @SuppressWarnings ("Duplicates")
     private double getMinWidth ()
     {
@@ -132,6 +154,7 @@ public class MainController
         minWidth += titleCol.getMinWidth();
         minWidth += locationCol.getWidth();
         minWidth += dateTimeCol.getWidth();
+        minWidth += statusCol.getWidth();
         minWidth += TableViewBorder;
 
         return AnchorPane.getLeftAnchor(tableView) + minWidth + AnchorPane.getRightAnchor(tableView);
@@ -178,6 +201,7 @@ public class MainController
         sizeLeft -= typeCol.getWidth();
         sizeLeft -= locationCol.getWidth();
         sizeLeft -= dateTimeCol.getWidth();
+        sizeLeft -= statusCol.getWidth();
         sizeLeft -= TableViewBorder;
 
         sizeLeft = Math.max(sizeLeft, titleCol.getMinWidth());
@@ -185,11 +209,15 @@ public class MainController
         titleCol.setPrefWidth(sizeLeft);
     }
 
+    //endregion
+
+    //region --------------- OnClick Methods ---------------
+
     public void Add_onClick ()
     {
         activeView = false;
 
-        goTo("AddView.fxml", (Stage) tableView.getScene().getWindow(), MAIN_WIDTH, MAIN_HEIGHT);
+        goTo("AddView.fxml", (Stage) tableView.getScene().getWindow(), ADD_WIDTH, ADD_HEIGHT, true);
     }
 
     public void Detailed_onClick ()
@@ -203,7 +231,7 @@ public class MainController
     {
         activeView = false;
 
-        goTo("Login.fxml", (Stage) tableView.getScene().getWindow(), LOGIN_WIDTH, LOGIN_HEIGHT);
+        goTo("Login.fxml", (Stage) tableView.getScene().getWindow(), LOGIN_WIDTH, LOGIN_HEIGHT, false);
     }
 
     public void Delete_onClick ()
@@ -218,4 +246,6 @@ public class MainController
         tableView.getItems().clear();
         tableView.getItems().addAll(Incident.readFromSave());
     }
+
+    //endregion
 }
