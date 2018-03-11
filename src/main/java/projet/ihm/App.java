@@ -42,10 +42,10 @@ public class App extends Application
                 {{
                     add(new Incident("On manque de feutres",
                                      "bob",
-                                     "Il n'y a plus de feutres rouge et verts dans la salle...",
+                                     "Il n'y a plus de feutres rouges et verts dans la salle...",
                                      PlusDeFeutres));
 
-                    add(new Incident("Vitre briése amphi Est",
+                    add(new Incident("Vitre brisée amphi Est",
                                      "alice",
                                      "Un pigeon a volé droit dans la vitre...",
                                      VitreBrisee,
