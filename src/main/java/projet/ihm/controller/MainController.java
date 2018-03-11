@@ -142,6 +142,12 @@ public class MainController
         });
     }
 
+    public void refresh(){
+        tableView.getItems().clear();
+        tableView.getItems().addAll(Incident.readFromSave());
+    }
+
+
     //region --------------- GUI methods -------------------
 
     @SuppressWarnings ("Duplicates")
@@ -224,7 +230,7 @@ public class MainController
     {
         activeView = false;
 
-        openDetailed_newWindow("Vue détaillée", tableView.getSelectionModel().getSelectedItem());
+        openDetailed_newWindow("Vue détaillée", tableView.getSelectionModel().getSelectedItem(), this);
     }
 
     public void Deco_onClick ()

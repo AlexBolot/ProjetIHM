@@ -1,10 +1,7 @@
 package projet.ihm.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import projet.ihm.model.incidents.Incident;
 import projet.ihm.model.incidents.Status;
@@ -20,6 +17,12 @@ import static projet.ihm.model.users.Privileges.Privilege.UpdateStatus;
 
 public class DetailedController
 {
+    //region --------------- Constructor ---------------
+
+    public DetailedController(MainController mainController){
+        this.mainController = mainController;
+    }
+
     //region --------------- FXML Attributes ---------------
 
     @FXML
@@ -48,6 +51,7 @@ public class DetailedController
     //endregion
 
     private Incident incident;
+    private MainController mainController;
 
     public void setIncident (Incident incident)
     {
@@ -109,6 +113,7 @@ public class DetailedController
             Incident.writeToSave(list);
         }
 
+        this.mainController.refresh();
         Close_onClick();
     }
 

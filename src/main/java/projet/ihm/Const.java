@@ -6,12 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import projet.ihm.controller.DetailedController;
+import projet.ihm.controller.MainController;
 import projet.ihm.model.incidents.Incident;
 import projet.ihm.model.incidents.Urgency;
 
@@ -71,12 +73,12 @@ public class Const
         }
     }
 
-    public static void openDetailed_newWindow (String newTitle, Incident incident)
+    public static void openDetailed_newWindow (String newTitle, Incident incident, MainController mainController)
     {
         try
         {
             FXMLLoader loader = new FXMLLoader(Const.class.getClassLoader().getResource("DetailedView.fxml"));
-            DetailedController controller = new DetailedController();
+            DetailedController controller = new DetailedController(mainController);
 
             controller.setIncident(incident);
             loader.setController(controller);
