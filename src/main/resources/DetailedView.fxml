@@ -54,7 +54,7 @@
       </Label>
       <Button layoutX="670.0" layoutY="576.0" mnemonicParsing="false" onAction="#Close_onClick" prefHeight="30.0" prefWidth="80.0" text="Fermer" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
       <Button fx:id="btnSubmit" layoutX="550.0" layoutY="576.0" mnemonicParsing="false" onAction="#Submit_onClick" prefHeight="30.0" prefWidth="80.0" text="Valider" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="150.0" />
-      <Label layoutX="550.0" layoutY="496.0" prefHeight="30.0" text="Status" underline="true" AnchorPane.bottomAnchor="110.0">
+      <Label layoutX="550.0" layoutY="496.0" prefHeight="30.0" text="Statut" underline="true" AnchorPane.bottomAnchor="110.0">
          <font>
             <Font size="18.0" />
          </font>
