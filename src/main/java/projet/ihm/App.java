@@ -43,7 +43,7 @@ public class App extends Application
                     add(new Incident("On manque de feutres",
                                      "bob",
                                      "Il n'y a plus de feutres rouges et verts dans la salle...",
-                                     PlusDeFeutres));
+                                     Fournitures));
 
                     add(new Incident("Vitre brisée amphi Est",
                                      "alice",

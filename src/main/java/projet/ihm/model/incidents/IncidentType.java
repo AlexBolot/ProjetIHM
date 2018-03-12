@@ -6,7 +6,7 @@ public enum IncidentType
     VoitureMalGaree("Voiture mal garée"),
     VitreBrisee("Vitre brisée"),
     LampeCassee("Lampe cassée"),
-    PlusDeFeutres("Plus de feutres");
+    Fournitures("Manque de fournitures");
 
     private String label;
 
