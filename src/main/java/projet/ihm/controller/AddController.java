@@ -53,7 +53,7 @@ public class AddController
     @FXML
     private TextField txtTitle;
     @FXML
-    private TextField txtAuthor;
+    private Label txtAuthor;
     @FXML
     private TextArea  txtDescription;
 

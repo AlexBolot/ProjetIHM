@@ -48,7 +48,6 @@
 				<Label fx:id="lblUrgency2" layoutX="72.0" layoutY="424.0" text="faible" textFill="#008c1f" />
 				<Label fx:id="lblUrgency3" layoutX="122.0" layoutY="424.0" text="modérée" textFill="#005eff" />
 				<Label fx:id="lblUrgency4" layoutX="189.0" layoutY="424.0" text="grande" textFill="#ff7700" />
-				<TextField fx:id="txtAuthor" layoutY="460.0" prefHeight="30.0" prefWidth="260.0" promptText="Nom du déclarant *" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="460.0" />
 				<Button layoutY="510.0" mnemonicParsing="false" onAction="#Cancel_onClick" prefHeight="30.0" prefWidth="80.0" text="Annuler" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="510.0" />
 				<Button layoutX="180.0" layoutY="510.0" mnemonicParsing="false" onAction="#Submit_onClick" prefHeight="30.0" prefWidth="80.0" text="Valider" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="510.0" />
 				<Label layoutY="560.0" prefHeight="20.0" text="* = obligatoire" AnchorPane.leftAnchor="0.0">
@@ -56,6 +55,8 @@
 						<Font size="11.0" />
 					</font>
 				</Label>
+            <Label layoutX="54.0" layoutY="460.0" prefHeight="30.0" prefWidth="50.0" text="Auteur :" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="460.0" />
+            <Label fx:id="txtAuthor" layoutX="57.0" layoutY="467.0" prefHeight="30.0" text="txtAuthor" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="460.0" />
 			</children>
 		</AnchorPane>
 	</children>
