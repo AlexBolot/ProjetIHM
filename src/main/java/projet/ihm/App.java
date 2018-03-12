@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import projet.ihm.model.incidents.Building;
 import projet.ihm.model.incidents.Incident;
+import projet.ihm.model.incidents.Room;
 import projet.ihm.model.users.User;
 
 import java.io.IOException;
@@ -87,16 +89,27 @@ public class App extends Application
                                      Majeure,
                                      LocalDate.now(),
                                      LocalTime.now(),
-                                     DONE));
+                                     TODO));
+
+                    add(new Incident("Loreum ipsum... !",
+                            "thomas",
+                            "",
+                            Fournitures,
+                            Building.NONE,
+                            Room.NONE,
+                            Majeure,
+                            LocalDate.now(),
+                            LocalTime.now(),
+                            TODO));
                 }});
             }
             if (argsList.contains("addUsers"))
             {
                 User.writeToSave(new ArrayList<User>()
                 {{
-                    add(new User("bob", "bob".hashCode(), User.Preset.Agent));
-                    add(new User("alice", "alice".hashCode(), User.Preset.Admin));
-                    add(new User("marcel", "marcel".hashCode(), User.Preset.SimpleUser));
+                    add(new User("gérard", "gérard".hashCode(), User.Preset.Agent));
+                    add(new User("jeanne", "jeanne".hashCode(), User.Preset.Admin));
+                    add(new User("mathieu", "mathieu".hashCode(), User.Preset.SimpleUser));
                 }});
             }
         }
