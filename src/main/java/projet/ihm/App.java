@@ -45,7 +45,13 @@ public class App extends Application
                     add(new Incident("On manque de feutres",
                                      "bob",
                                      "Il n'y a plus de feutres rouges et verts dans la salle...",
-                                     Fournitures));
+                                     Fournitures,
+                                     BatE,
+                                     E134,
+                                     Moderee,
+                                     LocalDate.now(),
+                                     LocalTime.now(),
+                                     TODO));
 
                     add(new Incident("Vitre brisée amphi Est",
                                      "alice",
