@@ -1,5 +1,9 @@
 package projet.ihm.model.incidents;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public enum IncidentType
 {
     CarreauCasse("Carreau Cassé"),
@@ -23,5 +27,20 @@ public enum IncidentType
     public String label ()
     {
         return label;
+    }
+
+    public static IncidentType getFromLabel (String label)
+    {
+        for (IncidentType type : values())
+        {
+            if (type.label.equals(label)) return type;
+        }
+
+        throw new IllegalArgumentException("Status not found");
+    }
+
+    public static ArrayList<String> labels ()
+    {
+        return Arrays.stream(IncidentType.values()).map(IncidentType::label).collect(Collectors.toCollection(ArrayList::new));
     }
 }

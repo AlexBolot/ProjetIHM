@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static projet.ihm.Const.*;
@@ -53,16 +54,16 @@ public class AddController
     @FXML
     private TextField txtTitle;
     @FXML
-    private Label txtAuthor;
+    private Label     txtAuthor;
     @FXML
     private TextArea  txtDescription;
 
     @FXML
-    private ComboBox<Room>         ddlRoom;
+    private ComboBox<String> ddlRoom;
     @FXML
-    private ComboBox<Building>     ddlBuilding;
+    private ComboBox<String> ddlBuilding;
     @FXML
-    private ComboBox<IncidentType> ddlType;
+    private ComboBox<String> ddlType;
 
     @FXML
     private Slider urgencySlider;
@@ -105,27 +106,29 @@ public class AddController
         txtAuthor.setText(currentLoggedIn == null ? "" : currentLoggedIn.name());
 
         ddlType.getItems().clear();
-        ddlType.getItems().addAll(IncidentType.values());
+        ddlType.getItems().addAll(IncidentType.labels());
 
         ddlBuilding.getItems().clear();
-        ddlBuilding.getItems().addAll(Building.values());
+        ddlBuilding.getItems().addAll(Building.labels());
         ddlBuilding.setOnAction(event -> {
 
-            Building building = ddlBuilding.getSelectionModel().getSelectedItem();
+            Building building = Building.getFromLabel(ddlBuilding.getSelectionModel().getSelectedItem());
 
             if (building == Building.NONE)
             {
                 ddlRoom.getItems().clear();
                 ddlRoom.setDisable(true);
-                ddlRoom.getSelectionModel().select(Room.NONE);
+                ddlRoom.getSelectionModel().select(Room.NONE.label());
             }
             else
             {
                 ArrayList<Room> interestingRooms = new ArrayList<>(Arrays.asList(Room.values()));
                 interestingRooms.removeIf(room -> room.building() != building && room.building() != null);
 
+                ArrayList<String> list = interestingRooms.stream().map(Room::label).collect(Collectors.toCollection(ArrayList::new));
+
                 ddlRoom.getItems().clear();
-                ddlRoom.getItems().addAll(interestingRooms);
+                ddlRoom.getItems().addAll(list);
                 ddlRoom.setDisable(false);
             }
         });
@@ -338,9 +341,9 @@ public class AddController
         String author = txtAuthor.getText().trim();
         String description = txtDescription.getText().trim();
 
-        Room room = ddlRoom.getValue();
-        Building building = ddlBuilding.getValue();
-        IncidentType type = ddlType.getValue();
+        Room room = Room.getFromLabel(ddlRoom.getValue());
+        Building building = Building.getFromLabel(ddlBuilding.getValue());
+        IncidentType type = IncidentType.getFromLabel(ddlType.getValue());
 
         LocalDate date = datePicker.getValue();
         LocalTime time = timePicker.getValue();

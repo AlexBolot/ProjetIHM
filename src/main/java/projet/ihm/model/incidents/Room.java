@@ -1,6 +1,8 @@
 package projet.ihm.model.incidents;
 
-import org.jetbrains.annotations.Contract;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static projet.ihm.model.incidents.Building.*;
 
@@ -36,9 +38,22 @@ public enum Room
         this.label = name();
     }
 
-    @Contract (pure = true)
     public Building building () { return building; }
 
-    @Contract (pure = true)
     public String label () { return label;}
+
+    public static Room getFromLabel (String label)
+    {
+        for (Room room : values())
+        {
+            if (room.label.equals(label)) return room;
+        }
+
+        throw new IllegalArgumentException("Status not found");
+    }
+
+    public static ArrayList<String> labels ()
+    {
+        return Arrays.stream(Room.values()).map(Room::label).collect(Collectors.toCollection(ArrayList::new));
+    }
 }

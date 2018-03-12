@@ -147,7 +147,6 @@ public class MainController
         tableView.getItems().addAll(Incident.readFromSave());
     }
 
-
     //region --------------- GUI methods -------------------
 
     @SuppressWarnings ("Duplicates")
